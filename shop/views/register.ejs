@@ -1,0 +1,22 @@
+    <style>
+            .box{
+            text-align: center;
+            padding: 3px;
+            width: 300px;
+            background-color: brown;
+            color: aliceblue;
+        }
+    </style>
+    <form action="/registeruser" method="POST">
+        user name <input type="text" name="username" placeholder="username"><br>
+        nama <input name="nama" type="text"><br>
+        email <input type="email" name="email" ><br>
+        password <input type="password" name="pass" ><br>
+        alamat <input type="text" name="alamat"><br>
+        <input type="number" value="1" hidden name="role" />
+        <br>
+        <input type="submit" value="simpan">
+        <% if (typeof notif !== 'undefined') { %>
+            <div class="box"><b><%= notif %></b></div>
+        <% } %> 
+    </form>

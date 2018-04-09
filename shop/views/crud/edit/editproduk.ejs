@@ -1,0 +1,27 @@
+<style>
+    .gaya{
+        margin-top: 60px;
+    }
+</style>
+<h4><% include ../../partial/header.ejs%></h4> 
+<form id= "update " method="POST" action="/updateproduk/<%=id%>" enctype="multipart/form-data">
+    <table class="gaya">
+        <tr>
+            <td>
+                <input type="text" required name="namaproduk" placeholder="<%= produk[0].nama_produk %>"> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea required name="deskripsiproduk"><%= produk[0].deskripsi %> </textarea> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input required type="number" name="hargaproduk" placeholder="<%= produk[0].harga %>">
+            </td>    
+        </tr>
+        <input type="file" name="uploaded_image" accept=".jpg,.png" required/>
+    </table>
+  <br><p><button type="submit" class="btn btn-success" value="Simpan" >UPDATE</button>
+</form>     

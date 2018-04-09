@@ -1,0 +1,18 @@
+<style>
+        .gaya{
+            margin-top: 60px;
+        }
+    </style>
+    <h4><% include ../../partial/header.ejs%></h4> 
+    <form id= "update " method="POST" action="/updatesubkategori/<%=id%>">
+        Edit Sub Kategori
+        <table class="gaya">
+            <tr>
+                <td>
+                    <input type="text" required name="editsubkategori" placeholder="<%= subkategori[0].jenis_kategori %>"> 
+                </td>
+            </tr>    
+            </tr>
+        </table>
+      <br><p><button type="submit" class="btn btn-success" value="Simpan" >UPDATE</button>
+    </form>     

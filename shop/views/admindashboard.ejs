@@ -1,0 +1,315 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>React App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  </head>
+
+  <style>
+      .margin{
+          margin-top: 5px;
+          width: 250px; 
+      }
+      .gaya{
+          margin-top: 60px;
+          width: 100%;
+      }
+      h4{
+          margin-top: 30px;
+      }
+      .style2{
+          width: 400px;
+          margin-top: 10px;
+      }
+      .style1{
+          width: 400px;
+          background-color: rgb(226, 26, 26);
+          color: white;
+      }
+      .style3{
+          width: 600px;
+      }
+      .style4{
+          width: 90%;
+      }
+      .option {
+          color: rgb(132, 8, 8);
+          font-size: 14px;
+      }
+  </style>
+  <body>
+  <div class="container gaya">    
+  <h4><% include partial/header.ejs%></h4>  
+    <p> <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Dashboard KATEGORI
+        </button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+            Dashboard SUB KATEGORI
+        </button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+            Dashboard PRODUK
+        </button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+            Dashboard PRODUK WARNA
+        </button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">
+            Dashboard PRODUK UKURAN DAN STOK
+        </button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample">
+            History Invoice
+        </button>
+    <!-- HISTORY INVOICE      -->
+            </p>
+            <div class="collapse" id="collapseExample5">
+                <div class="card card-body">
+                    <table class="table table-striped style2">
+                        <thead class="thead-dark style1">
+                            <th>HISTORY INVOICE</th>
+                            <th>Nama Penerima</th>
+                        </thead>
+                        <tbody>
+                            <% histori.forEach (x => { %>
+                                <tr>    
+                                    <td> <a href="/invoicedetail/<%= x.kode_invoice %>"><%= x.kode_invoice  %></a></td>
+                                    <td> <a href="/invoicedetail/<%= x.kode_invoice %>"><%= x.nama_penerima  %></a></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <hr>
+                </div>
+            </div>
+
+<!-- INPUT KATEGORI -->
+
+    </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <table class="table table-striped style2">
+                    <thead class="thead-dark style1">
+                        <th>Kategori</th>
+                        <th colspan="2">Aksi</th>
+                    </thead>
+                    <tbody>
+                        <% x.forEach (x => { %>
+                            <tr>    
+                                <td> <%= x.kategori %></td>
+                                <td><a href="/editkategori/<%=x.id%>">Edit</a></td>
+                                <td><button type="button" class="btn btn-warning" onclick="return confirm('Yakin Data Mau di hapus?')"><a href="/hapus/<%=x.id%>">Hapus</button></td>                                   
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <hr>
+                <form action="/simpankategori" method="POST">
+                    <input type="text" name="kategori" placeholder="Jenis Kategori">
+                    <button class="btn-btn success" type="submit">Simpan</button>
+                </form>
+            </div>
+        </div>
+        <p> 
+    </p>
+        <div class="collapse" id="collapseExample1">
+            <div class="card card-body">
+                  <!-- Menampilkan Tabel Sub Kategori -->
+                <table class="table table-striped style2">
+                    <thead class="thead-dark style1">
+                        <th>Season</th>
+                        <th>Sub Kategori</th>
+                        <th colspan="2">Aksi</th>
+                    </thead>
+                    <tbody>
+                        <% data.forEach (data => { %>
+                        <tr>    
+                            <td><%= data.kategori %></td>
+                            <td><%= data.jenis_kategori %></td>
+                            <td><a href="/edit/<%= data.id %>">Edit</a></td>
+                            <td><a class = "btn btn-success" href="/hapussubproduk/<%= data.id %>">Hapus</a></td>                        
+                        </tr>   
+                        <% }) %>
+                    </tbody>
+                </table>
+
+            <!-- form input sub kategori -->
+            <hr>
+                <form action="/simpansubkategori" method="POST">
+                    <br><select name="kategori" class="form-control style2">
+                        <option selected>Pilih Kategori</option>
+                        <% x.forEach (x => { %>
+                            <option name="kategori" value="<%= x.id %>"><%= x.kategori %></option>
+                        <% }) %>                             
+                    </select>
+                    <br>
+                    <br><input type="text" name="jenis_kategori" placeholder="Jenis Sub Kategori">    
+                    <input type="submit">                            
+                </form>
+            </div>
+        </div>
+
+    </p>
+        <div class="collapse" id="collapseExample2">
+            <div class="card card-body">
+                  <!-- Menampilkan Tabel Sub Kategori -->
+                  <table class="table table-striped style4">
+                    <thead class="thead-dark style1">
+                        <th>Kategori</th>
+                        <th>Sub Kategori</th>
+                        <th>Nama Produk</th>
+                        <th>Desripsi Produk </th>
+                        <th>Harga</th>
+                        <th colspan="2">Aksi</th>
+                    </thead>
+                    <tbody>
+                        <% produk.forEach ( produk => { %>
+                            <tr>
+                                <td><%= produk.kategori %> </td>
+                                <td><%= produk.jenis_kategori %> </td>
+                                <td><%= produk.nama_produk %> </td>
+                                <td><%= produk.deskripsi %> </td>
+                                <td><%= produk.harga %> </td>
+                                <td><a href="/updateproduk/<%= produk.id %>">Edit</a></td>
+                                <td>Hapus</td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>    
+                <h3>Input Produk</h3>
+                <form action="/simpanproduk" method="POST" enctype="multipart/form-data">
+                    <select name="sub_kategori" class="form-control style2">
+                        <option selected name="sub_kategori">Pilih Sub Kategori</option>
+                            <% data.forEach (data => { %>
+                                <option class="option" name="sub_kategori" value="<%= data.id %>"> <%= data.jenis_kategori %> | <%= data.kategori %> </option>            
+                            <% }) %>
+                    </select>
+                        <input class="form-control margin" id="ex1" type="text" name="nama_produk" required placeholder="Nama Produk">
+                        <input class="form-control margin" id="ex2" type="number" name="harga" required placeholder="Harga Produk">
+                        <textarea class="form-control margin" name="deskripsi" rows="4"  required name="deskripsi" placeholder="Deskrips Produk"></textarea>
+                        <input type="file" name="uploaded_image" accept=".jpg,.png" required/>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>    
+            </div>
+        </div>
+
+
+        <div class="collapse" id="collapseExample3">
+            <div class="card card-body">
+                <table class="table table-striped style2">
+                    <thead class="thead-dark style1">
+                        <th>Nama Produk</th>
+                        <th>Warna</th>
+                        <th colspan="2">Aksi</th>
+                    </thead>
+                    <tbody>
+                        <% warna.forEach ( warna => { %>
+                            <tr>
+                                <td><%= warna.nama_produk %></td>
+                                <td><%= warna.warna %></td>
+                                <td><a href="/updatewarna/<%= warna.id %>">Edit</a></td>
+                                <td><a href="#">Hapus</a></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>    
+                <h4>Input Warna Produk</h4>
+                <form action="/simpanwarna" method="POST">
+                    <select name="warnaid" class="form-control style2">
+                        <option selected name="warnaid">Pilih ID Produk</option>
+                            <% produk.forEach (data => { %>
+                                <option name="warnaid" value="<%= data.id %>"> <%= data.nama_produk %>&emsp; >>&emsp;  <%= data.jenis_kategori %>&emsp; >>&emsp;  <%= data.kategori %></option>            
+                            <% }) %>
+                        </select>
+                    <div class="container">
+                        <br><div class="col-xs-3">
+                            <input class="form-control margin" type="text" name="warna" placeholder="Input Warna">
+                        </div>
+                    </div>
+                    <br><button type="submit" class="btn btn-primary">Simpan</button>
+                </form>    
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseExample4">
+            <div class="card card-body">
+                <table class="table table-striped style2">
+                    <thead class="thead-dark style1">
+                        <th>Nama Produk </th>
+                        <th>Ukuran </th>
+                        <th>Stok</th>
+                        <th colspan="2">Aksi</th>
+                    </thead>
+                    <tbody>
+                        <% ukuran.forEach ( ukuran => { %>
+                            <tr>
+                                <td><%= ukuran.nama_produk %> </td>
+                                <td><%= ukuran.ukuran %> </td>
+                                <td><%= ukuran.stok %></td>  
+                                <td> <a href="/updatestok/<%= ukuran.id %>">Editt</a></td>
+                                <td> <a href="#">Hapus</a></td>                                        
+                                <td></td>                                     
+                                </tr>
+                        <% }) %>
+                    </tbody>
+                </table>    
+                <h4>Input Ukuran dan Stok</h4>
+                <form action="/simpanukuran" method="POST">
+                    <select name="warnaid" class="form-control style2">
+                        <option selected name="warnaid">Pilih ID Produk</option>
+                            <% warna.forEach (warna => { %>
+                                <option name="warnaid" value="<%= warna.id %>"> <%= warna.nama_produk %>&emsp; >> <%= warna.warna %> </option>            
+                            <% }) %>
+                    </select>
+                    <div class="container">
+                        <br><div class="col-xs-3">
+                            <input class="form-control margin" type="text" name="ukuran" placeholder="Input Ukuran Produk">
+                        </div>
+                        <div class="col-xs-3">
+                            <input class="form-control margin" type="number" name="jumlah_produk" placeholder="Input Jumlah Stok Produk">
+                        </div>
+                    </div>
+                    <br><button type="submit" class="btn btn-primary">Simpan</button>
+                </form>    
+            </div>
+        </div>
+
+
+
+<!-- ////=========================KATALOG PRODUK=========================================/ -->
+
+                   
+    <hr>                    
+               <h4>Lihat Keseluruhan Tabel</h4>  
+               <table class="table table-striped style4">
+                    <thead class="thead-dark style1">
+                        <th>Season</th>
+                        <th>Kategori</th>
+                        <th>Nama Produk </th>
+                        <th>Warna</th>
+                        <th>Ukuran </th>
+                        <th>Stok</th>
+                    </thead>
+                    <tbody>
+                        <% ukuran.forEach ( ukuran => { %>
+                            <tr>
+                                <td><%= ukuran.kategori %> </td>
+                                <td><%= ukuran.jenis_kategori %> </td>
+                                <td><%= ukuran.nama_produk %> </td>
+                                <td><%= ukuran.warna %> </td>
+                                <td><%= ukuran.ukuran %> </td>
+                                <td><%= ukuran.stok %></td>                                       
+                                </tr>
+                        <% }) %>
+                    </tbody>
+                </table>    
+        </div>
+     </div>   
+
+</body>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

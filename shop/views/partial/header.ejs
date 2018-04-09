@@ -1,0 +1,25 @@
+<html>
+<head>
+      <style>
+    a{
+        color: rgb(162, 0, 0);
+    }
+    </style>
+</head>    
+
+    <body>
+        <% if ( role == 0 ) { %>
+            Selamat Datang Admin <b> <a href="/logout" class="btn btn-success"> Logout</a> </b>
+            
+        <% } else if ( role == 1 ) { %>
+            <h3>Selamat Data User <b><%= dataheader %></b> ,<a href="/logout" onclick="return confirm('Yakin Mau Keluar?')" class="btn btn-success">Logout</a> | <button type="submit" class="btn btn-success"> <a href="/cart ">BAG</a> </button> | <a href="/historyinvoice/<%= iduser %>" class="btn btn-success"> History Invoice</a> </h3>
+        <% } else { %>     
+            <a href="/login">Login</a>
+            <a href="/register"> Register</a> 
+        <% } %>    
+
+    </body>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</html>

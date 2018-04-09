@@ -1,0 +1,7 @@
+ .style > li{
+    list-style: none;
+    text-align: center;
+    display: inline;
+    padding: 10px;
+
+}
